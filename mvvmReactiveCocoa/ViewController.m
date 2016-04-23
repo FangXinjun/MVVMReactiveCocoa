@@ -31,7 +31,7 @@
     
     _viewModel = [[FXJViewModel alloc] init];
     
-    
+    // 只要文本框文字改变，就会修改userName的值(accountFiled的文本变化就会修改viewModel的userName属性值)
     RAC(self.viewModel, userName) = self.accountFiled.rac_textSignal;
     
     RAC(self.viewModel, password) = self.passwordFiled.rac_textSignal;
@@ -42,8 +42,7 @@
     
     @weakify(self);
     
-    //登录成功要处理的方法
-    
+    //设置登录成功要处理的方法
     [self.viewModel.successObject subscribeNext:^(NSArray * x) {
         
         @strongify(self);
@@ -76,7 +75,6 @@
 - (void)onClick {
     
     //监听按钮点击事件
-    
     [[self.loginBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {
          [_viewModel login];

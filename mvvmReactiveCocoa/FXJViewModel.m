@@ -40,7 +40,7 @@
 
 - (void)initialize {
     
-    //监听属性  返回信号
+    //监听属性  返回信号(监听userName值得变化)
     _userNameSignal = RACObserve(self, userName);
     
     _passwordSignal = RACObserve(self, password);
@@ -55,7 +55,6 @@
 }
 
 //合并两个输入框信号，并返回按钮bool类型的值
-
 - (id) buttonIsValid {
     
     RACSignal *isValid = [RACSignal
@@ -64,6 +63,7 @@
                           
                           reduce:^id(NSString *userName, NSString *password){
                               
+                              NSLog(@"%@ - %@",userName,password);
                               return @(userName.length >= 3 && password.length >= 3);
                               
                           }];
