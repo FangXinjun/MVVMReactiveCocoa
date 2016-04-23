@@ -88,7 +88,7 @@
     [self bindModel];
     [self onClick];
     
-    // 只要文本框文字改变，就会修改label的文字
+    // 只要文本框文字改变，就会修改label的文字(accountFiled的文本变化就会修改_testLable的text的值)
     RAC(_testLable,text) = self.accountFiled.rac_textSignal;
 }
 
