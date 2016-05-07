@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *testLable;
 
-@property (nonatomic, strong) FXJViewModel        *viewModel;
+@property (nonatomic, strong) FXJViewModel    *viewModel;
 
 @end
 
@@ -33,29 +33,18 @@
     
     // 只要文本框文字改变，就会修改userName的值(accountFiled的文本变化就会修改viewModel的userName属性值)
     RAC(self.viewModel, userName) = self.accountFiled.rac_textSignal;
-    
     RAC(self.viewModel, password) = self.passwordFiled.rac_textSignal;
-    
     RAC(self.loginBtn, enabled) = [_viewModel buttonIsValid];
     
-    
-    
     @weakify(self);
-    
     //设置登录成功要处理的方法
     [self.viewModel.successObject subscribeNext:^(NSArray * x) {
         
         @strongify(self);
         
-        FXJTwoViewController *vc = [[FXJTwoViewController alloc] init];
-        vc.userName = x[0];
-        
-        vc.password = x[1];
-        
-        [self presentViewController:vc animated:YES completion:^{
-                        
-        }];
-        
+        UIStoryboard *SB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FXJTwoViewController *vc = [SB instantiateViewControllerWithIdentifier:@"twoVC"];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     
     //fail
@@ -79,7 +68,6 @@
      subscribeNext:^(id x) {
          [_viewModel login];
      }];
-    
 }
 
 - (void)viewDidLoad {
@@ -87,7 +75,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self bindModel];
     [self onClick];
-    
     // 只要文本框文字改变，就会修改label的文字(accountFiled的文本变化就会修改_testLable的text的值)
     RAC(_testLable,text) = self.accountFiled.rac_textSignal;
 }

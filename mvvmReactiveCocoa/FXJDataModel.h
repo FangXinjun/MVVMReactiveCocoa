@@ -10,4 +10,5 @@
 
 @interface FXJDataModel : NSObject
 
+
 @end

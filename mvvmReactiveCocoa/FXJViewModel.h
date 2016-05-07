@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) RACSubject *errorObject;
 
+/**监听按钮是否激活*/
 - (id) buttonIsValid;
 
 - (void)login;

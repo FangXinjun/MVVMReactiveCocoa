@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FXJTwoViewController : UIViewController
-@property (nonatomic, copy) NSString                *userName;
-@property (nonatomic, copy) NSString                *password;
+
 
 @end
